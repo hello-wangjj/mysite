@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>a base html</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/semantic.min.js' %}"></script>
+    <script src="{% static 'js/highcharts.js'%}"></script>
+    <script src="{% static 'js/highcharts-more.js' %}"></script>
+    <script src="{% static 'js/exporting.js' %}"></script>
+</head>
+<body>
+    <div class="ui sidebar inverted vertical menu left thin visible">
+        <div class="header item">
+            <img src="{% static 'images/logo2.png' %}">
+        </div>
+        <div class="item">
+            <a href="../data.html">Documents &nbsp;&nbsp;<i class="browser icon"></i></a>
+        </div>
+        <div class="item">
+            <a href="../charts.html">Charts &nbsp;&nbsp;<i class="bar chart icon"></i></a>
+        </div>
+        <div class="item">
+            <a href="#">Others &nbsp;&nbsp;<i class="help icon"></i></a>
+        </div>
+    </div>
+    <div class="pusher">
+        <div class="ui four item menu">
+            <a class="item" id="menu"><i class="content icon"></i>Menu</a>
+            <a class="item">Documents</a>
+            <a class="item">Charts</a>
+            <a class="item">Others</a>
+        </div>
+    </div>
+    <script>
+        $('#menu').click(function () {
+            $('.ui.sidebar').sidebar('toggle');
+        });
+    </script>
+</body>
+</html>

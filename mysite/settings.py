@@ -25,7 +25,7 @@ SECRET_KEY = '^ex(%icep_4q6=osy1ug!j@7njgg776bq6(j^c!@nh6ys4*$)o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','115.159.71.62']
+ALLOWED_HOSTS = ['127.0.0.1', '115.159.71.62', 'localhost']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,6 +141,6 @@ STATICFILES_FINDERS = (
 
 # upload folder
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 connect('ganji', host='127.0.0.1', port=27017)
