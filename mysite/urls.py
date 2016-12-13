@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from semantic_ui.views import base
+from semantic_ui.views import base,data,chart
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^base/', base)
+    url(r'^base/', base),
+    url(r'^data/', data),
+    url(r'chart/', chart)
 ]

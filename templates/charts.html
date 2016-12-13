@@ -1,10 +1,319 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="ui equal width grid" style="width: 80%; margin: 10px auto;">
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment" id="all">
 
-</body>
-</html>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment" id="pie1">
+
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui container segment" id="pie2">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="ui container segment">
+                    <div class="ui dropdown">
+                        <div class="text">类目发帖排名前三总量对比</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <div class="item" id="CY">朝阳</div>
+                            <div class="item" id="HD">海淀</div>
+                            <div class="item" id="TZ">通州</div>
+                            <div class="item" id="test">test</div>
+                        </div>
+                    </div>
+                    <div class="ui container" id="container"></div>
+
+                </div>
+            </div>
+
+        </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+    $('#all').highcharts({
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: '各个类目发帖量'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'category'
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total percent market share'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}'
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.1f}</b> of total<br/>'
+                },
+                series: [{
+                    name: '类目',
+                    colorByPoint: true,
+                    data: {{ chart_ALL|safe }}
+                }]
+
+            });
+    $('#CY').click(function () {
+        $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '发帖数量最大的类目'
+        },
+        subtitle: {
+            text: '数据图表'
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '发帖数量'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: {{ chart_CY|safe }}
+    });
+    });
+    $('#HD').click(function () {
+       $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '发帖数量最大的类目'
+        },
+        subtitle: {
+            text: '数据图表'
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '发帖数量'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: {{ chart_HD|safe }}
+    });
+    });
+    $('#TZ').click(function () {
+        $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '发帖数量最大的类目'
+        },
+        subtitle: {
+            text: '数据图表'
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '发帖数量'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: {{ chart_TZ|safe }}
+    });
+    });
+    $('#test').click(function () {
+        $(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Monthly Average Rainfall'
+        },
+        subtitle: {
+            text: 'Source: WorldClimate.com'
+        },
+        xAxis: {
+            categories: [
+                'Tokyo',
+                'New York',
+                'London',
+                'Berlin'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Rainfall (mm)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '发帖量',
+            data: [49.9, 71.5, 106.4, 129.2]}]
+    });
+});
+    });
+    $('#pie1').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '交易类目分布'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f}% ',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '类目分布',
+            data: {{ cate_distributed|safe }}
+{#                {#}
+{#                    name: 'Chrome',#}
+{#                    y: 12.8,#}
+{#                    sliced: true,#}
+{#                    selected: true#}
+{#                },#}
+
+        }]
+    });
+    $('#pie2').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: '交易地区分布'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f}% ',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '地区分布',
+            data: {{ sale_distributed|safe }}
+{#                {#}
+{#                    name: 'Chrome',#}
+{#                    y: 12.8,#}
+{#                    sliced: true,#}
+{#                    selected: true#}
+{#                },#}
+
+        }]
+    });
+
+</script>
+{% endblock %}

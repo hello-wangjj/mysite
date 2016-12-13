@@ -1,10 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="ui equal width grid" style="width: 80%; margin: 10px auto;">
+        <div class="row">
+            <div class="column">
+                <div class="ui segment red">
+                    <div class="ui statistic">
+                        <div class="value">
+                           {{ counts }}
+                        </div>
+                        <div class="label">Downloads </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui segment blue">
+                    <div class="ui statistic">
+                        <div class="value">
+                            {{ last_date }}
+                        </div>
+                        <div class="label">Update Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="ui segment">
+                    <div class="ui items divided">
+                    {% for item in loaded %}
+                        <div class="item">
+                            <div class="image">
+                                <img src="{% static 'images/0002.jpg' %}">
+                            </div>
+                            <div class="content">
+                                <div class="extra">
+                                    {% for cate in item.cates %}
+                                    <div class="ui label black">{{ cate }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="extra">
+                                <a class="header">{{ item.title }}</a>
+                                </div>
+                                <div class="meta">
+                                    <span class="cinema">{{ item.price }}</span>
+                                </div>
+                                <div class="meta">
+                                    <span class="cinema">{{ item.pub_date }}</span>
+                                </div>
+                                <div class="description">
+                                    <p>
+                                    成色[{{ item.look }}]-<a href="{{ item.url }}">购买链接</a>
+                                    </p>
+                                </div>
+                                <div class="extra">
+                                    {% for a in item.area %}
+                                    <div class="ui label green">{{ a }}</div>
+                                        {% endfor  %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                    <div class="ui menu three item " style="border-bottom: 2px solid darkblue">
+                        {% if loaded.has_previous %}
+                            <a class="item" href="?page={{ loaded.previous_page_number }}">
+                            <i class="left arrow icon"></i>Previous
+                        </a>
+                        {% endif %}
 
-</body>
-</html>
+                        <a class="disabled item">
+                            <span class="item black">Page {{ loaded.number }} of {{ loaded.paginator.num_pages }}</span>
+                        </a>
+                    {% if loaded.has_next %}
+                        <a class="item" href="?page={{ loaded.next_page_number }}">
+                            Next
+                            <i class="right arrow icon"></i>
+                        </a>
+                    {% endif %}
+                    </div>
+            </div>
+        </div>
+</div>
+{% endblock %}
