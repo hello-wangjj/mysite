@@ -30,7 +30,7 @@
                             <div class="item" id="CY">朝阳</div>
                             <div class="item" id="HD">海淀</div>
                             <div class="item" id="TZ">通州</div>
-                            <div class="item" id="test">test</div>
+                            <div class="item" id="three">all</div>
                         </div>
                     </div>
                     <div class="ui container" id="container"></div>
@@ -189,37 +189,32 @@
         series: {{ chart_TZ|safe }}
     });
     });
-    $('#test').click(function () {
+    $('#three').click(function () {
         $(function () {
     $('#container').highcharts({
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Monthly Average Rainfall'
+            text: '三个地区发帖量比较'
         },
         subtitle: {
-            text: 'Source: WorldClimate.com'
+            text: '数据图表'
         },
         xAxis: {
-            categories: [
-                'Tokyo',
-                'New York',
-                'London',
-                'Berlin'
-            ],
+            categories: {{ xAxis_All|safe }},
             crosshair: true
         },
         yAxis: {
             min: 0,
             title: {
-                text: 'Rainfall (mm)'
+                text: '发帖量'
             }
         },
         tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
             pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -232,7 +227,7 @@
         },
         series: [{
             name: '发帖量',
-            data: [49.9, 71.5, 106.4, 129.2]}]
+            data: {{data_all|safe}}}]
     });
 });
     });

@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^base/', base),
     url(r'^data/', data),
-    url(r'chart/', chart)
+    url(r'chart/', chart),
+    url(r'', data)
 ]

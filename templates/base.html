@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>a base html</title>
+    <title>Data Lab</title>
     <link rel="stylesheet" href="{% static 'css/semantic.min.css' %}">
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/semantic.min.js' %}"></script>
@@ -41,5 +41,7 @@
             $('.ui.sidebar').sidebar('toggle');
         });
     </script>
+    {% block js %}
+    {% endblock %}
 </body>
 </html>
